@@ -1,3 +1,4 @@
+##resnet 50模型
 """Enables dynamic setting of underlying Keras module.
 """
 from __future__ import absolute_import
