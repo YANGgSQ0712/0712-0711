@@ -176,8 +176,8 @@ if __name__ == "__main__":
     # -------------------------------------------- step 1/4 : 加载数据 ---------------------------
     train_dir_list = 'train.txt'
     valid_dir_list = 'val.txt'
-    batch_size = 8
-    epochs = 20
+    batch_size = 8 ##单词训练数据量
+    epochs = 30  ##训练轮次
     num_classes = 214
     train_data = Garbage_Loader(train_dir_list, train_flag=True)
     valid_data = Garbage_Loader(valid_dir_list, train_flag=False)
