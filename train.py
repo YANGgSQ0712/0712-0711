@@ -177,7 +177,7 @@ if __name__ == "__main__":
     train_dir_list = 'train.txt'
     valid_dir_list = 'val.txt'
     batch_size = 8
-    epochs = 10
+    epochs = 20
     num_classes = 214
     train_data = Garbage_Loader(train_dir_list, train_flag=True)
     valid_data = Garbage_Loader(valid_dir_list, train_flag=False)
