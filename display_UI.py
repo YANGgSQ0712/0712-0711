@@ -4,8 +4,8 @@
 # 
 # Created by: PyQt5 UI code generator 5.15.6
 #
-# @Time: 2022/6/28 下午11:41
-# @Author: Yang Shuo
+# @Time: 2022/6/28 下午13:43
+# @Author: Yang Shuoqiu
 # @File: display_UI.py
 # @Software: PyCharm
 
@@ -152,14 +152,6 @@ class Ui_MainWindow(QMainWindow):
         type[str(data.split()[0].split('_')[0])]=1
         print(data.split()[0].split('_')[0])
         print(type)
-        # if type['其他垃圾']>0 :
-        #     self.lineEdit_3.setText(str(type['其他垃圾']))
-        # if type['厨余垃圾'] > 0:
-        #     self.lineEdit_4.setText(str(type['厨余垃圾']))
-        # if type['可回收物'] > 0:
-        #     self.lineEdit_5.setText(str(type['可回收物']))
-        # if type['有害垃圾'] > 0:
-        #     self.lineEdit_6.setText(str(type['有害垃圾']))
         if type['其他垃圾']==1 :
             self.lineEdit_3.setStyleSheet("background:blue")
         elif type['厨余垃圾'] == 1:
