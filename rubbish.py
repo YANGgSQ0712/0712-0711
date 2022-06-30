@@ -7,6 +7,7 @@ import torch
 import os
 import numpy as np
 from PIL import Image
+
 def getLabel(line_num):
     f = open("dir_label.txt",encoding='utf-8')
     if line_num == 1:
@@ -36,12 +37,12 @@ def padding_black( img):
 
     img = img_bg
     return img
-def getRubbish(img):
+def load():
     os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
     t = transforms.Compose([transforms.ToPILImage(),
                             transforms.Resize((224, 224)),
                             transforms.ToTensor()])
-    num_classes = 214    # 加载数据
+    num_classes = 214  # 加载数据
     map_location = "cpu"
     model = models.resnet50(pretrained=False)
     fc_inputs = model.fc.in_features
@@ -50,14 +51,15 @@ def getRubbish(img):
     checkpoint = torch.load(resume, map_location=map_location)
     model.load_state_dict(checkpoint['state_dict'])
     model.eval()
-
+    return t,model
+def getRubbish(img,t,model):
     image = t(img).unsqueeze(0)
     with torch.no_grad():
         pred = model(image)
         _, pred = torch.max(pred, 1)
         pred = getLabel(pred.item()+1)
     return pred
-def shibie(pathh):
+def shibie(pathh,t,model):
     img = Image.open(pathh)
     img = img.convert('RGB')
     img = padding_black(img)
@@ -65,7 +67,7 @@ def shibie(pathh):
     img=resize1(img)
     totnseor= transforms.ToTensor()
     img=totnseor(img)
-    pre = getRubbish(img)
+    pre = getRubbish(img,t,model)
     return pre
 
 if __name__ == '__main__':
@@ -76,7 +78,9 @@ if __name__ == '__main__':
     # cv2.imshow('11',img)
     # # cv2.waitKey(0)
     # print(getRubbish(img))
-    print(shibie("D:/lesson-4/垃圾图片库/可回收物_木制玩具/img_木制玩具_163.jpeg"))
+    t,model = load()
+
+    print(shibie("D:/lesson-4/垃圾图片库/可回收物_木制玩具/img_木制玩具_163.jpeg",t,model))
 
     # f = open("test.txt",encoding='utf-8')
     # line = f.readline()
